@@ -12,14 +12,8 @@ interface NavigationUserInfoProps {
 
 const NavigationUserInfo = ({user}: NavigationUserInfoProps) => {
 
-    const mobileNavigationDrawer = useMobileNavigationDrawer();
     const profileModal = useProfileModal();
-    
-    const editProfile = () => {
-        mobileNavigationDrawer.closeDrawer();
-        profileModal.openModal();
-    }
-    
+  
     if(!user) return null;
     
     return (

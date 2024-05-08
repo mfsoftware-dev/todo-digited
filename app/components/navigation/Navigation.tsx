@@ -3,28 +3,25 @@
 import {IoExit, IoToday} from "react-icons/io5";
 import {IoIosAdd} from "react-icons/io";
 import axios from "axios";
-import React, {useEffect, useState} from "react";
-import ProjectModal from "@/app/(protected)/components/ProjectModal";
+import React, {useEffect} from "react";
 import useProjectModal from "@/app/hooks/project/useProjectModal";
 import useDeleteProjectModal from "@/app/hooks/project/useDeleteProjectModal";
 import {RiArrowRightDoubleFill} from "react-icons/ri";
 import NavigationLinkCard from "@/app/components/navigation/NavigationLinkCard";
 import NavigationUserInfo from "@/app/components/navigation/NavigationUserInfo";
-import {SessionProvider, signOut, useSession} from "next-auth/react";
-import {ProjectExt} from "@/app/types";
-import ProfileModal from "@/app/(protected)/components/ProfileModal";
+import {signOut} from "next-auth/react";
 import NavigationProjectsList from "@/app/components/navigation/NavigationProjectsList";
 import Dialog from "@/app/components/ui/Dialog";
 import {toast} from "react-hot-toast";
 import useProjectStore from "@/app/hooks/project/useProjectStore";
+import useAuth from "@/app/hooks/useAuth";
 
 const Navigation = () => {
     
+    const {loggedUser, fetchLoggedUser} = useAuth();
     const {projects, fetchProjects} = useProjectStore();
     const projectModal = useProjectModal();
     const deleteProjectModal = useDeleteProjectModal();
-    
-    const {data: sessionData} = useSession();
     
     const deleteProject = () => {
         if(!deleteProjectModal.project) return;
@@ -41,13 +38,14 @@ const Navigation = () => {
     
     useEffect(() => {
         fetchProjects();
+        fetchLoggedUser();
     }, [])
     
     return (
         <>
             <div className={"h-full md:h-auto md:fixed md:left-0 md:top-0 md:bottom-0 md:w-[var(--navigation-width)] md:bg-gray-50 md:border md:shadow-lg md:m-5 md:rounded-lg p-5 flex flex-col space-y-5 justify-between z-[10]"}>
 
-                <NavigationUserInfo user={sessionData?.user}/>
+                <NavigationUserInfo user={loggedUser}/>
 
                 <hr/>
 
@@ -81,12 +79,6 @@ const Navigation = () => {
                     <p className={"text-sm"}>Esci</p>
                 </div>
             </div>
-            
-            <ProjectModal/>
-            
-            <SessionProvider>
-                <ProfileModal/>
-            </SessionProvider>
             
             <Dialog isOpen={deleteProjectModal.isOpen} title={"Elimina Progetto"} message={"Sei sicuro di voler eliminare questo progetto? Tutti i task ad esso associati verranno eliminati"} onConfirm={deleteProject} onCancel={deleteProjectModal.closeModal} />
         </>

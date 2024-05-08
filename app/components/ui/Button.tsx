@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import styles from "@/app/styles/ui/button.module.scss";
+import styles from "./../../styles/ui/button.module.scss";
 
 export enum ButtonType {
     PRIMARY = "#3b82f6",

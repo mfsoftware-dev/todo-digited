@@ -2,7 +2,6 @@
 
 import {useEffect, useState} from "react";
 import {FieldValues, SubmitHandler, useForm} from "react-hook-form";
-import {useRouter} from "next/navigation";
 import axios from "axios";
 import {useSession} from "next-auth/react";
 import useProfileModal from "@/app/hooks/useProfileModal";
@@ -10,14 +9,15 @@ import Modal from "@/app/components/ui/Modal";
 import Input from "@/app/components/input/Input";
 import Button, {ButtonType} from "@/app/components/ui/Button";
 import {toast} from "react-hot-toast";
+import useAuth from "@/app/hooks/useAuth";
 
 const ProfileModal = () => {
-
-    const router = useRouter();
+    
     const [isLoading, setIsLoading] = useState(false);
     
-    const {isOpen, closeModal} = useProfileModal();
     const {data: sessionData, update: updateSession} = useSession();
+    const {isOpen, closeModal} = useProfileModal();
+    const {fetchLoggedUser} = useAuth();
 
     const {
         register,
@@ -36,7 +36,6 @@ const ProfileModal = () => {
 
         axios.patch("/api/profile", data).then((res) => {
             if(res.status !== 200) return toast.error(res.statusText);
-            toast.success(res.data.message);
 
             updateSession({
                 user: {
@@ -44,8 +43,9 @@ const ProfileModal = () => {
                     ...res.data.user
                 }
             }).then(() => {
+                fetchLoggedUser();
                 toast.success(res.data.message);
-                router.refresh();
+                closeModal();
             })
         }).catch((error) => {
             toast.error(error.response.data);

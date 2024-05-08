@@ -1,6 +1,6 @@
 "use client"
 
-import styles from "@/app/styles/input/label.module.scss"
+import styles from "./../../styles/input/label.module.scss"
 
 import React from "react";
 

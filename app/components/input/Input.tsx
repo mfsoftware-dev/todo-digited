@@ -1,6 +1,6 @@
 "use client"
 
-import styles from "@/app/styles/input/input.module.scss"
+import styles from "./../../styles/input/input.module.scss"
 
 import {FieldErrors, FieldValues, UseFormRegister} from "react-hook-form";
 import Label from "@/app/components/input/Label";

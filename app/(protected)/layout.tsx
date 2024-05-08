@@ -4,6 +4,9 @@ import Image from "next/image";
 import Background from "@/public/assets/login.jpg";
 import ContextProvider from "@/app/components/ContextProvider";
 import MobileNavigationDrawer from "@/app/(protected)/components/MobileNavigationDrawer";
+import ProjectModal from "@/app/(protected)/components/ProjectModal";
+import ProfileModal from "@/app/(protected)/components/ProfileModal";
+import React from "react";
 
 export default async function AuthLayout({
     children,
@@ -16,9 +19,7 @@ export default async function AuthLayout({
             <div className={"w-screen h-screen bg-white/95 absolute -z-10"}/>
             <div>
                 <div className={"hidden md:block"}>
-                    <ContextProvider>
-                        <Navigation/>
-                    </ContextProvider>
+                    <Navigation/>
                 </div>
                 <div className={"md:ps-[var(--navigation-width)]"}>
                     <div className={"p-5 md:px-20 md:py-10 w-full z-10"}>
@@ -26,7 +27,13 @@ export default async function AuthLayout({
                     </div>
                 </div>
             </div>
+            
             <MobileNavigationDrawer/>
+            <ProjectModal/>
+            
+            <ContextProvider>
+                <ProfileModal/>
+            </ContextProvider>
         </div>
     );
 }

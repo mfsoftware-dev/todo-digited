@@ -2,6 +2,20 @@ import {NextResponse} from "next/server";
 import {getLoggedUser} from "@/app/actions/users";
 import prisma from "@/app/libs/prismadb";
 
+export async function GET(request: Request) {
+    try {
+        
+        const loggedUser = await getLoggedUser();
+        
+        return NextResponse.json({
+            loggedUser
+        })
+    } catch (error) {
+        if(process.env.NODE_ENV !== "production") console.log("getProfile", error);
+        return new NextResponse("Si è verificato un errore, riprova", {status: 500})
+    }
+}
+
 export async function PATCH(request: Request) {
     try {
 
@@ -26,7 +40,7 @@ export async function PATCH(request: Request) {
         })
 
         return NextResponse.json({
-            message: "Dati profilo aggiornati correttamente",
+            message: "Dati profilo aggiornati con successo",
             user: updatedProfile
         })
 

@@ -10,12 +10,13 @@ import Modal from "@/app/components/ui/Modal";
 import Button, {ButtonType} from "@/app/components/ui/Button";
 import Input from "@/app/components/input/Input";
 import TextArea from "@/app/components/input/TextArea";
+import useProjectStore from "@/app/hooks/project/useProjectStore";
 
 const ProjectModal = () => {
 
-    const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
     const {project, isOpen, closeModal} = useProjectModal();
+    const {fetchProjects} = useProjectStore();
 
     const {
         register,
@@ -29,16 +30,17 @@ const ProjectModal = () => {
         setValue("description", project?.description ?? "");
     }, [project]);
 
-    const saveClient: SubmitHandler<FieldValues> = (data: FieldValues) => {
+    const onSubmit: SubmitHandler<FieldValues> = (data: FieldValues) => {
         setIsLoading(true);
 
         axios({
-            method: (project ? "put" : "post"),
+            method: (project ? "patch" : "post"),
             url: `/api/projects/${project ? project.id : ""}`,
             data: data
         }).then((res) => {
-            toast(`Progetto ${project ? "aggiornato" : "inserito"} correttamente`);
-            router.refresh();
+            if(res.status !== 200) return toast.error(res.statusText);
+            toast.success(res.data.message);
+            fetchProjects();
             closeModal();
         }).catch((error) => {
             toast(error.response.data);
@@ -49,7 +51,7 @@ const ProjectModal = () => {
     
     return (
         <Modal isOpen={isOpen} title={`${project ? "Modifica" : "Aggiungi"} Progetto`} onClose={closeModal}>
-            <form onSubmit={handleSubmit(saveClient)}>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <div className={"border-t border-b py-3 flex flex-col space-y-3"}>
                     <Input id={"name"} label={"Nome"} placeholder={"Inserisci il nome del progetto"} register={register} errors={errors} required disabled={isLoading}/>
                     <TextArea id={"description"} label={"Descrizione"} placeholder={"Inserisci una descrizione per questo progetto"} register={register} errors={errors} required disabled={isLoading}/>

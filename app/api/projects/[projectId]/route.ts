@@ -6,7 +6,7 @@ interface IParams {
     projectId?: string
 }
 
-export async function PUT(request: Request, { params }: { params: IParams }){
+export async function PATCH(request: Request, { params }: { params: IParams }){
     try {
 
         const body = await request.json();

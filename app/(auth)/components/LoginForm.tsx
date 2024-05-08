@@ -9,7 +9,6 @@ import {useState} from "react";
 import Input from "@/app/components/input/Input";
 import Button from "@/app/components/ui/Button";
 import LogInWithGoogle from "@/app/components/ui/LogInWithGoogle";
-import logInWithGoogle from "@/app/components/ui/LogInWithGoogle";
 
 const LoginForm = () => {
     
@@ -35,7 +34,7 @@ const LoginForm = () => {
             callbackUrl: `${window.location.origin}/`,
             redirect: false
         }).then((result) => {
-            if (result?.error) return toast(result.error);
+            if (result?.error) return toast.error(result.error);
             router.push("/today-tasks");
         }).catch((error) => {
             toast.error(error.response.data);

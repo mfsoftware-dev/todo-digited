@@ -44,11 +44,16 @@ export async function POST(request: Request) {
             data: {
                 name,
                 description,
+                user: {
+                    connect: {
+                        id: loggedUser.id
+                    }
+                }
             }
         })
 
         return NextResponse.json({
-            message: "Progetto registrato correttamente",
+            message: "Progetto inserito con successo",
             data: createdProject.id
         })
 

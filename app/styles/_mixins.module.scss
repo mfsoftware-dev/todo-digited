@@ -1,0 +1,16 @@
+$box-shadow: 0 .25em .5em 0 rgba(black, .2) ;
+$transition-duration: 350s;
+
+@mixin before {
+  content: "";
+}
+
+@mixin hover-lift() {
+  transition: transform $transition-duration ease-in-out;
+  box-shadow: $box-shadow;
+  
+  &:hover,
+  &:focus {
+    transform: scale(1.05);
+  }
+}

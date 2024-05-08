@@ -1,6 +1,6 @@
 "use client"
 
-import styles from "@/app/styles/input/checkbox.module.scss";
+import styles from "../../styles/input/checkbox.module.scss";
 
 import { Checkbox as HUICheckbox } from "@headlessui/react";
 

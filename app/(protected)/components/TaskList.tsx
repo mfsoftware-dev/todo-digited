@@ -61,7 +61,10 @@ const TaskList = ({list, onChange}: TaskListProps) => {
                 </div>
             </div>
 
-            <TaskDrawer onChange={onChange}/>
+            <TaskDrawer onChange={() => {
+                fetchProjects();
+                onChange();
+            }}/>
         </>
     )
 }
