@@ -1,0 +1,18 @@
+.input {
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem;
+  border-width: 1px;
+  border-color: #F3F4F6;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+  outline: 2px solid transparent;     
+  outline-offset: 2px;
+  
+  :hover {
+    border-color: #3B82F6;
+    border-width: 1px;
+  }
+}

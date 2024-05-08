@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  margin-top: 0.5rem;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.required {
+  color: #EF4444;
+  margin-left: 4px;
+}

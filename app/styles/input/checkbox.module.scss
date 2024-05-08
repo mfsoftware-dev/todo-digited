@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.checkbox {
+  display: block;
+  border-radius: 0.25rem;
+  border-width: 1px;
+  background-color: #ffffff;
+  width: 16px;
+  height: 16px;
+  
+  svg {
+    stroke: #fff;
+    opacity: 0;
+  }
+}
+
+.label {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+  margin-left: 0.5rem;
+}
