@@ -59,7 +59,7 @@ const NewTaskForm = ({projectId, onSuccess}: NewTaskFormProps) => {
                 <form onSubmit={addNewTask} className={"flex space-x-3 flex-grow ms-2"}>
                     <input type={"text"} disabled={isLoading} className={"w-full outline-none py-2 px-4 rounded-md"} placeholder={"Aggiungi un nuovo task..."} value={formData.name} onChange={(event) => setData("name", event.target.value)}/>
                     <select name={"priority"} value={formData.priority} className={"outline-none"} onChange={(event) => setData("priority", event.target.value)}>
-                        {formattedTaskPriority.map((priority) => <option value={priority.value}>{priority.label}</option>)}
+                        {formattedTaskPriority.map((priority) => <option key={priority.value} value={priority.value}>{priority.label}</option>)}
                     </select>
                 </form>
             </div>
