@@ -1,7 +1,7 @@
 import {NextResponse} from "next/server";
 import {getLoggedUser} from "@/app/actions/users";
 import prisma from "@/app/libs/prismadb";
-import {endOfDay, startOfDay} from "date-fns";
+import {startOfDay} from "date-fns";
 
 export async function GET() {
     try {
@@ -13,18 +13,9 @@ export async function GET() {
         const items = await prisma.task.findMany({
             where: {
                 userId: loggedUser.id,
-                AND: [
-                    {
-                        expiresAt: {
-                            gte: startOfDay(new Date()),
-                        }
-                    },
-                    {
-                        expiresAt: {
-                            gte: endOfDay(new Date())
-                        }
-                    }
-                ]
+                createdAt: {
+                    lt: startOfDay(new Date())
+                }
             },
             orderBy: {
                 createdAt: "desc"
@@ -35,7 +26,7 @@ export async function GET() {
             items
         })
     } catch (error) {
-        if(process.env.NODE_ENV !== "production") console.log("getTodayTaskList", error);
+        if(process.env.NODE_ENV !== "production") console.log("getOldTaskList", error);
         return new NextResponse("Si è verificato un errore, riprova", {status: 500})
     }
 }

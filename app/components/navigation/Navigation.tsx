@@ -6,7 +6,7 @@ import axios from "axios";
 import React, {useEffect} from "react";
 import useProjectModal from "@/app/hooks/project/useProjectModal";
 import useDeleteProjectModal from "@/app/hooks/project/useDeleteProjectModal";
-import {RiArrowRightDoubleFill} from "react-icons/ri";
+import {RiArrowLeftDoubleFill, RiArrowRightDoubleFill} from "react-icons/ri";
 import NavigationLinkCard from "@/app/components/navigation/NavigationLinkCard";
 import NavigationUserInfo from "@/app/components/navigation/NavigationUserInfo";
 import {signOut} from "next-auth/react";
@@ -15,6 +15,7 @@ import Dialog from "@/app/components/ui/Dialog";
 import {toast} from "react-hot-toast";
 import useProjectStore from "@/app/hooks/project/useProjectStore";
 import useAuth from "@/app/hooks/useAuth";
+import {FaCalendarXmark} from "react-icons/fa6";
 
 const Navigation = () => {
     
@@ -52,6 +53,7 @@ const Navigation = () => {
                 <div className={"flex flex-col space-y-2"}>
                     <p className={"text-sm font-semibold uppercase"}>Task</p>
                     <NavigationLinkCard title={"Prossimi"} icon={RiArrowRightDoubleFill} href={"/upcoming-tasks"}/>
+                    <NavigationLinkCard title={"Passati"} icon={RiArrowLeftDoubleFill} href={"/old-tasks"}/>
                     <NavigationLinkCard title={"Oggi"} icon={IoToday} href={"/today-tasks"}/>
                 </div>
 

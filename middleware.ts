@@ -18,6 +18,7 @@ export default withAuth(
 export const config = {
     matcher: [
         "/today-tasks/:path*",
+        "/old-tasks/:path*",
         "/upcoming-tasks/:path*",
         "/projects/:path*",
         "/profile/:path*",

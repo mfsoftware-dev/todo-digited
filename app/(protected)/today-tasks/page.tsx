@@ -1,11 +1,11 @@
-import TodayTaskList from "@/app/(protected)/today-tasks/components/TodayTaskList";
 import {format} from "date-fns";
 import {it} from "date-fns/locale";
 import {Metadata} from "next";
 import Header from "@/app/components/ui/Header";
+import TodayTaskList from "@/app/(protected)/today-tasks/components/TodayTaskList";
 
 export const metadata: Metadata = {
-    title: "Task Oggi",
+    title: "Task di oggi",
 };
 
 export default function TodayTasks() {

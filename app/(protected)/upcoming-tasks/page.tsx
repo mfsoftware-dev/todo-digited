@@ -3,7 +3,7 @@ import {Metadata} from "next";
 import Header from "@/app/components/ui/Header";
 
 export const metadata: Metadata = {
-    title: "Prossimi Task",
+    title: "Prossimi task",
 };
 
 export default function UpcomingTasks() {

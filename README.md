@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# ToDo List - Digit'Ed
 
-First, run the development server:
+ToDo List commissionata da Digit’Ed S.p.A.
+
+Per lo sviluppo è stato utilizzato il framework React **Next.js** per la parte front-end e back-end (API).
+
+Per la comunicazione con il database **PostgreSQL** è stato utilizzato l'ORM **Prisma**.
+
+Per lo styling sono stati utilizzati **TailwindCSS** e **SASS**.
+
+
+## Autore
+
+- [@mfsoftware-dev](https://github.com/mfsoftware-dev)
+
+
+## Distribuzione
+
+Per generare una build di produzione utilizzare il comando
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+  next build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Per avviare il progetto in ambiente di sviluppo utilizzare il comando
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+  npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Per generare il client Prisma utilizzare il comando
 
-## Learn More
+```bash
+  npx prisma generate
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Stack Tecnico
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+[Next.js](https://nextjs.org/)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+[NextAuth.js](https://next-auth.js.org/)
 
-## Deploy on Vercel
+[Prisma (PostgreSQL)](https://www.prisma.io/)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+[Zustand](https://zustand-demo.pmnd.rs/)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+[Axios](https://www.npmjs.com/package/axios)
+
+## UI
+
+[HeadlessUI](https://headlessui.com/)
+
+[TailwindCSS](https://tailwindcss.com/)
+
+[React-icons](https://react-icons.github.io/react-icons/)
+
+[Scss](https://sass-lang.com/)
+
+[React-hot-toast](https://react-hot-toast.com/)
+
+[React-modern-drawer](https://www.npmjs.com/package/react-modern-drawer)
+
+## Altro
+
+[Bcrypt](https://www.npmjs.com/package/bcrypt)
+
+[Date-fns](https://date-fns.org/)
+
+[React-hook-form](https://react-hook-form.com/)

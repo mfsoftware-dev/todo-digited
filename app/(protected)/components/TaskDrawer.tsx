@@ -104,7 +104,10 @@ const TaskDrawer = ({onChange}: TaskDrawerProps) => {
         <Drawer open={isOpen} size={isMobile ? "100%" : 600} onClose={closeDrawer} direction={"right"}>
             <div className={"p-5 flex flex-col space-y-3 h-full"}>
                 <div className={"flex justify-between items-center"}>
-                    <p className={"font-bold text-xl"}>{task?.name}</p>
+                    <div>
+                        <p className={"font-bold text-xl"}>{task?.name}</p>
+                        {task?.createdAt && <span className={"text-xs"}>Creato il <span className={"font-semibold"}>{format(task?.createdAt!, "dd/MM/yyyy")}</span></span>}
+                    </div>
                     <div onClick={closeDrawer} className={"hover:scale-110 transition cursor-pointer"}>
                         <MdClose size={25}/>
                     </div>
