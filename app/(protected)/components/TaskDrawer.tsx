@@ -10,7 +10,7 @@ import axios from "axios";
 import {useRouter} from "next/navigation";
 import Input from "@/app/components/input/Input";
 import Button, {ButtonType} from "@/app/components/ui/Button";
-import {MdClose} from "react-icons/md";
+import {MdClose, MdDeleteForever} from "react-icons/md";
 import TextArea from "@/app/components/input/TextArea";
 import {TaskPriority} from "@prisma/client";
 import Select from "@/app/components/input/Select";
@@ -20,6 +20,7 @@ import Checkbox from "@/app/components/input/Checkbox";
 import {format} from "date-fns";
 import {it} from "date-fns/locale";
 import useProjectStore from "@/app/hooks/project/useProjectStore";
+import {FaSave} from "react-icons/fa";
 
 interface TaskDrawerProps {
     onChange: () => void,
@@ -124,19 +125,19 @@ const TaskDrawer = ({onChange}: TaskDrawerProps) => {
                                 <TextArea id={"description"} label={"Descrizione"} rows={10} placeholder={"Inserisci una descrizione per questo task"} register={register} errors={errors} disabled={isLoading}/>
                             </div>
                             <div className={"col-span-2"}>
-                                <Select id={"projectId"} label={"Progetto"} items={formattedProjectList} register={register} errors={errors} disabled={isLoading}/>
+                                <Select id={"projectId"} enableClear={false} label={"Progetto"} items={formattedProjectList} register={register} errors={errors} disabled={isLoading}/>
                             </div>
                             <Input id={"expiresAt"} label={"Scadenza"} type={"date"} register={register} errors={errors} required disabled={isLoading}/>
                             <Select id={"priority"} label={"Priorità"} items={taskPrioritiesList} register={register} errors={errors} required disabled={isLoading}/>
-                            <Checkbox label={"Completata"} value={completed} onChange={(value) => setValue("completed", value)} />
+                            <Checkbox label={"Completato"} value={completed} onChange={(value) => setValue("completed", value)} />
                         </div>
                     </div>
 
                     <hr/>
 
                     <div className={"flex space-x-3 items-center justify-start mt-3"}>
-                        <Button htmlType={"submit"} disabled={isLoading}>Salva Dati</Button>
-                        <Button htmlType={"submit"} type={ButtonType.DANGER} disabled={isLoading} onClick={deleteTask}>Elimina</Button>
+                        <Button htmlType={"submit"} disabled={isLoading} icon={FaSave}>Salva Dati</Button>
+                        <Button htmlType={"submit"} type={ButtonType.DANGER} disabled={isLoading} icon={MdDeleteForever} onClick={deleteTask}>Elimina</Button>
                     </div>
                 </form>
             </div>

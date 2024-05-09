@@ -20,7 +20,7 @@ const NavigationProjectsList = ({projects}: NavigationProjectsListProps) => {
             {projects ? (
                 <div className={"flex flex-col space-y-2"}>
                     {projects.map((project) => {
-                        return <NavigationProjectCard key={project.id} project={project} onEdit={() => projectModal.openModal(project)} onDelete={() => deleteProjectModal.openModal(project)}/>
+                        return <NavigationProjectCard key={project.id} project={project} onEdit={projectModal.openModal.bind(this, project)} onDelete={deleteProjectModal.openModal.bind(this, project)}/>
                     })}
                 </div>
             ) : (

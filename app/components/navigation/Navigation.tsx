@@ -61,7 +61,7 @@ const Navigation = () => {
                     <div className={"flex flex-col space-y-3"}>
                         <div className={"flex space-x-3 items-center justify-between"}>
                             <p className={"text-sm font-semibold uppercase"}>Progetti</p>
-                            <div onClick={() => projectModal.openModal(undefined)} className={"aspect-square p-1 bg-white rounded-md hover:scale-110 hover:bg-blue-500 hover:text-white border transition cursor-pointer"}>
+                            <div onClick={projectModal.openModal.bind(this, undefined)} className={"aspect-square p-1 bg-white rounded-md hover:scale-110 hover:bg-blue-500 hover:text-white border transition cursor-pointer"}>
                                 <IoIosAdd size={20}/>
                             </div>
                         </div>
@@ -74,7 +74,7 @@ const Navigation = () => {
 
                 <hr/>
 
-                <div onClick={() => signOut({callbackUrl: '/'})} className={`rounded-md h-10 px-4 w-full flex space-x-3 items-center hover:text-white hover:bg-red-500 transition text-red-500 cursor-pointer`}>
+                <div onClick={signOut.bind(this, {callbackUrl: "/"})} className={`rounded-md h-10 px-4 w-full flex space-x-3 items-center hover:text-white hover:bg-red-500 transition text-red-500 cursor-pointer`}>
                     <IoExit size={20}/>
                     <p className={"text-sm"}>Esci</p>
                 </div>

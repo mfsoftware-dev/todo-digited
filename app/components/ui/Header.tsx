@@ -2,6 +2,7 @@
 
 import {IoMenu} from "react-icons/io5";
 import useMobileNavigationDrawer from "@/app/hooks/useMobileNavigationDrawer";
+import styles from "../../styles/ui/header.module.scss";
 
 interface HeaderProps {
     title: string,
@@ -12,9 +13,9 @@ const Header = ({title}: HeaderProps) => {
     const mobileNavigationDrawer = useMobileNavigationDrawer();
     
     return (
-        <div className={"py-5 flex justify-between"}>
-            <p className={"capitalize text-3xl font-bold"}>{title}</p>
-            <div className={"md:hidden"} onClick={() => mobileNavigationDrawer.openDrawer()}>
+        <div className={styles.container}>
+            <p className={styles.title}>{title}</p>
+            <div className={styles.menuIconContainer} onClick={mobileNavigationDrawer.openDrawer}>
                 <IoMenu size={30} />
             </div>
         </div>

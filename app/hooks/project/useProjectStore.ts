@@ -10,7 +10,6 @@ export interface AuthStore {
 const useAuth = create<AuthStore>((set) => ({
     projects: [],
     fetchProjects: async () => {
-        console.log("OK");
         const response = await axios.get("/api/projects")
         set({ projects: (response.status !== 200) ? [] : response.data.items })
     },

@@ -1,5 +1,7 @@
 "use client"
 
+import styles from "../../styles/ui/googleLogIn.module.scss";
+
 import {FcGoogle} from "react-icons/fc";
 
 interface LogInWithGoogleProps {
@@ -9,9 +11,9 @@ interface LogInWithGoogleProps {
 
 const LogInWithGoogle = ({onClick, disabled}: LogInWithGoogleProps) => {
     return (
-        <div onClick={onClick} className={`mt-5 rounded-full bg-white border hover:scale-105 hover:shadow-md flex space-x-3 items-center justify-center px-4 py-2 transition ${disabled ? "cursor-not-allowed opacity-95" : "cursor-pointer opacity-100"}`}>
-            <FcGoogle size={25}/>
-            <p className={"text-sm font-semibold"}>Accedi con Google</p>
+        <div onClick={onClick} className={`${styles.container} ${disabled ? styles.disabled : styles.enabled}`}>
+            <FcGoogle size={25} className={styles.icon}/>
+            <p className={styles.label}>Accedi con Google</p>
         </div>
     )
 }

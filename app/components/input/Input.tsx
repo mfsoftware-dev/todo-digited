@@ -16,10 +16,10 @@ interface InputProps {
     disabled?: boolean,
 }
 
-const Input = ({id, label, placeholder, type = "text", required, register, errors, disabled}: InputProps) => {
+const Input = ({id, label, placeholder, type, required, register, errors, disabled}: InputProps) => {
     return (
         <Label label={label} required={required}>
-            <input placeholder={placeholder} disabled={disabled} type={type} {...(register && register(id, {required: required}))} className={`${styles.input} ${errors && errors[id] && ""}`}/>
+            <input placeholder={placeholder} disabled={disabled} type={type ?? "text"} {...(register && register(id, {required: required}))} className={`${styles.input} ${errors && errors[id] && ""}`}/>
         </Label>
     )
 }

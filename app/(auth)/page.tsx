@@ -2,6 +2,7 @@ import Image from "next/image";
 import Background from "@/public/assets/login.jpg"
 import LoginForm from "@/app/(auth)/components/LoginForm";
 import {Metadata} from "next";
+import Logo from "@/public/assets/logo.png"
 
 export const metadata: Metadata = {
     title: "Login",
@@ -13,8 +14,8 @@ export default function Home() {
             <Image src={Background} alt={"Login Background"} className={"size-full object-cover absolute"} />
             <div className={"size-full bg-white/50 absolute"}/>
             <div className={"size-full flex items-center justify-center absolute"}>
-                <div className={"max-w-md mx-auto w-full p-10 rounded-lg shadow-md bg-white/95 flex flex-col space-y-10"}>
-                    <div className={"flex flex-col space-y-3"}>
+                <div className={"md:max-w-md h-full md:h-auto mx-auto w-full p-10 rounded-lg shadow-md bg-white/95 flex flex-col space-y-10 items-center justify-center"}>
+                    <div className={"flex flex-col space-y-3 w-full"}>
                         <p className={"text-4xl font-bold"}>Benvenuto</p>
                         <span className={"text-sm"}>Inserisci le tue credenziali per effettuare l&apos;accesso</span>
                     </div>

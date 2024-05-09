@@ -10,6 +10,8 @@ import Input from "@/app/components/input/Input";
 import Button, {ButtonType} from "@/app/components/ui/Button";
 import {toast} from "react-hot-toast";
 import useAuth from "@/app/hooks/useAuth";
+import {MdClose} from "react-icons/md";
+import {FaCheck} from "react-icons/fa";
 
 const ProfileModal = () => {
     
@@ -57,13 +59,14 @@ const ProfileModal = () => {
     return (
         <Modal isOpen={isOpen} title={"Modifica Profilo"} onClose={closeModal}>
             <form onSubmit={handleSubmit(updateProfile)}>
-                <div className={"border-t border-b py-3 flex flex-col space-y-3"}>
+                <div className={"flex flex-col space-y-3"}>
                     <Input id={"name"} label={"Nome"} placeholder={"Inserisci il tuo nome"} register={register} errors={errors} required disabled={isLoading}/>
                     <Input id={"email"} label={"Indirizzo E-Mail"} placeholder={"Inserisci il tuo indirizzo E-Mail"} register={register} errors={errors} required type={"email"} disabled={isLoading}/>
                 </div>
-                <div className={"flex space-x-3 items-center justify-end mt-3"}>
-                    <Button disabled={isLoading} onClick={closeModal} type={ButtonType.SECONDARY}>Chiudi</Button>
-                    <Button htmlType={"submit"} disabled={isLoading}>Conferma</Button>
+                <hr className={"my-5"}/>
+                <div className={"flex space-x-3 items-center justify-end"}>
+                    <Button disabled={isLoading} onClick={closeModal} icon={MdClose} type={ButtonType.SECONDARY}>Chiudi</Button>
+                    <Button htmlType={"submit"} disabled={isLoading} icon={FaCheck}>Conferma</Button>
                 </div>
             </form>
         </Modal>

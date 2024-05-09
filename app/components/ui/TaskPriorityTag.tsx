@@ -2,6 +2,7 @@
 
 import {TaskPriority} from "@prisma/client";
 import {taskPriorityColor, taskPriorityLabel} from "@/app/helpers/taskPriority";
+import styles from "../../styles/ui/taskPriorityTag.module.scss"
 
 interface TaskPriorityTagProps {
     priority: TaskPriority,
@@ -9,8 +10,8 @@ interface TaskPriorityTagProps {
 
 const TaskPriorityTag = ({priority}: TaskPriorityTagProps) => {
     return (
-        <div key={priority} className={"px-2 h-5 flex items-center justify-center leading-none rounded-full hover:text-white hover:bg-blue-500 transition cursor-pointer text-white font-semibold"} style={{backgroundColor: taskPriorityColor(priority)}}>
-            <span className={"text-[10px]"}>{taskPriorityLabel(priority)}</span>
+        <div key={priority} className={styles.container} style={{backgroundColor: taskPriorityColor(priority)}}>
+            <span className={styles.label}>{taskPriorityLabel(priority)}</span>
         </div>
     )
 }

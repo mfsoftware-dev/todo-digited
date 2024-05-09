@@ -1,0 +1,33 @@
+@mixin hover-lift() {
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+  
+  &:hover,
+  &:focus {
+    -webkit-transform:scale(1.03);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+}
+
+@mixin button-disabled() {
+  cursor: not-allowed;
+  opacity: 0.95;
+}
+
+@mixin button-enabled() {
+  cursor: pointer;
+  opacity: 1;
+}
+
+@mixin transition() {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);     
+  transition-duration: 150ms;
+}
+
+@mixin only-mobile() {
+  @media (min-width: 768px) { 
+    display: none;
+  }
+}

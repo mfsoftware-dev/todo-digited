@@ -2,6 +2,7 @@
 
 import React from "react";
 import {Description, Dialog, DialogPanel, DialogTitle, Transition} from "@headlessui/react";
+import styles from "../../styles/ui/modal.module.scss"
 
 interface ModalProps {
     title?: string,
@@ -14,12 +15,13 @@ interface ModalProps {
 const Modal = ({title, description, isOpen, onClose, children}: ModalProps) => {
     return (
         <Transition show={isOpen} enter={"duration-200 ease-out"} enterFrom={"opacity-0"} enterTo={"opacity-100"} leave={"duration-300 ease-out"} leaveFrom={"opacity-100"} leaveTo={"opacity-0"}>
-            <Dialog onClose={onClose} className={"relative z-[100] transition"}>
-                <div className={"fixed inset-0 bg-black/30"} aria-hidden={"true"}/>
+            <Dialog onClose={onClose} className={styles.dialog}>
+                <div className={styles.overlay} aria-hidden={"true"}/>
                 <div className={"fixed inset-0 flex w-screen items-center justify-center p-4"}>
-                    <DialogPanel className={"max-w-md w-full space-y-4 bg-white/95 p-5 border rounded-lg shadow-md"}>
-                        <DialogTitle className="font-bold">{title}</DialogTitle>
+                    <DialogPanel className={`${styles.panel} space-y-4`}>
+                        <DialogTitle className={styles.title}>{title}</DialogTitle>
                         {description && <Description>{description}</Description>}
+                        <hr/>
                         {children}
                     </DialogPanel>
                 </div>

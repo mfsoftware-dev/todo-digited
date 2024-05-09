@@ -11,6 +11,8 @@ import Button, {ButtonType} from "@/app/components/ui/Button";
 import Input from "@/app/components/input/Input";
 import TextArea from "@/app/components/input/TextArea";
 import useProjectStore from "@/app/hooks/project/useProjectStore";
+import {MdClose} from "react-icons/md";
+import {FaCheck} from "react-icons/fa";
 
 const ProjectModal = () => {
 
@@ -52,13 +54,14 @@ const ProjectModal = () => {
     return (
         <Modal isOpen={isOpen} title={`${project ? "Modifica" : "Aggiungi"} Progetto`} onClose={closeModal}>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div className={"border-t border-b py-3 flex flex-col space-y-3"}>
+                <div className={"flex flex-col space-y-3"}>
                     <Input id={"name"} label={"Nome"} placeholder={"Inserisci il nome del progetto"} register={register} errors={errors} required disabled={isLoading}/>
                     <TextArea id={"description"} label={"Descrizione"} placeholder={"Inserisci una descrizione per questo progetto"} register={register} errors={errors} required disabled={isLoading}/>
                 </div>
-                <div className={"flex space-x-3 items-center justify-end mt-3"}>
-                    <Button disabled={isLoading} onClick={closeModal} type={ButtonType.SECONDARY}>Chiudi</Button>
-                    <Button htmlType={"submit"} disabled={isLoading}>Conferma</Button>
+                <hr className={"my-5"}/>
+                <div className={"flex space-x-3 items-center justify-end"}>
+                    <Button disabled={isLoading} onClick={closeModal} icon={MdClose} type={ButtonType.SECONDARY}>Chiudi</Button>
+                    <Button htmlType={"submit"} disabled={isLoading} icon={FaCheck}>Conferma</Button>
                 </div>
             </form>
         </Modal>

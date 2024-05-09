@@ -9,6 +9,7 @@ import {useState} from "react";
 import Input from "@/app/components/input/Input";
 import Button from "@/app/components/ui/Button";
 import LogInWithGoogle from "@/app/components/ui/LogInWithGoogle";
+import {MdLogin} from "react-icons/md";
 
 const LoginForm = () => {
     
@@ -59,13 +60,13 @@ const LoginForm = () => {
     }
     
     return (
-        <div>
+        <div className={"w-full"}>
             <form onSubmit={handleSubmit(logIn)} className={"flex flex-col space-y-5"}>
                 <div className={"flex flex-col space-y-3"}>
                     <Input id={"email"} label={"Indirizzo E-Mail"} placeholder={"Inserisci il tuo indirizzo E-Mail"} register={register} errors={errors} type={"email"} disabled={isLoading}/>
                     <Input id={"password"} label={"Password"} placeholder={"Inserisci la password di accesso"} register={register} errors={errors} type={"password"} disabled={isLoading}/>
                 </div>
-                <Button htmlType={"submit"} disabled={isLoading}>Accedi</Button>
+                <Button htmlType={"submit"} icon={MdLogin} disabled={isLoading}>Accedi</Button>
             </form>
             <div className={"flex items-center justify-between my-5 space-x-5"}>
                 <hr className={"w-full"}/>
