@@ -107,10 +107,10 @@ const TaskDrawer = ({onChange}: TaskDrawerProps) => {
     
     return (
         <Drawer open={isOpen} size={isMobile ? "100%" : 600} onClose={closeDrawer} direction={"right"}>
-            <div className={"p-5 flex flex-col space-y-5 h-full"}>
+            <div className={"p-5 flex flex-col space-y-3 h-full"}>
                 <div className={"flex justify-between items-center"}>
                     <p className={"font-bold text-xl"}>{task?.name}</p>
-                    <div onClick={closeDrawer}>
+                    <div onClick={closeDrawer} className={"hover:scale-110 transition cursor-pointer"}>
                         <MdClose size={25}/>
                     </div>
                 </div>
@@ -129,7 +129,7 @@ const TaskDrawer = ({onChange}: TaskDrawerProps) => {
                             </div>
                             <Input id={"expiresAt"} label={"Scadenza"} type={"date"} register={register} errors={errors} required disabled={isLoading}/>
                             <Select id={"priority"} label={"Priorità"} items={taskPrioritiesList} register={register} errors={errors} required disabled={isLoading}/>
-                            <Checkbox label={"Completato"} value={completed} onChange={(value) => setValue("completed", value)} />
+                            <Checkbox label={"Completato"} checked={completed} onChange={(value) => setValue("completed", value)} />
                         </div>
                     </div>
 

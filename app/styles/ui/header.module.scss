@@ -16,7 +16,10 @@
   font-weight: bold;
 }
 
-.menu-icon-container {
-  @include only-mobile;
+.icon {
+  @include desktop-only {
+    display: none;
+    color: red;
+  }
 }
 

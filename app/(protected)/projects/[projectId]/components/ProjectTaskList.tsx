@@ -33,7 +33,7 @@ const ProjectTaskList = ({project}: ProjectTaskListProps) => {
             <NewTaskForm projectId={project.id} onSuccess={fetchProjectTasks}/>
             
             <div className={"mt-10"}>
-                <TaskList list={taskList} onChange={fetchProjectTasks}/>
+                <TaskList taskList={taskList} onChange={fetchProjectTasks}/>
             </div>
         </div>
     )

@@ -2,7 +2,6 @@ import Image from "next/image";
 import Background from "@/public/assets/login.jpg"
 import LoginForm from "@/app/(auth)/components/LoginForm";
 import {Metadata} from "next";
-import Logo from "@/public/assets/logo.png"
 
 export const metadata: Metadata = {
     title: "Login",

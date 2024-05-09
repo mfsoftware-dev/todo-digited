@@ -2,6 +2,7 @@
 
 import {FieldErrors, FieldValues, UseFormRegister} from "react-hook-form";
 import Label from "@/app/components/input/Label";
+import styles from "../../styles/input/textarea.module.scss";
 
 interface InputProps {
     id: string
@@ -17,7 +18,7 @@ interface InputProps {
 const TextArea = ({id, label, placeholder, rows = 3, required, register, errors, disabled}: InputProps) => {
     return (
         <Label label={label} required={required}>
-            <textarea placeholder={placeholder} disabled={disabled} rows={rows} {...(register && register(id, {required: required}))} className={`border border-gray-100 text-sm px-3 py-2 rounded-md hover:border-blue-500 outline-none focus:shadow-md focus:border-blue-500 transition ${errors && errors[id] && ""}`}/>
+            <textarea placeholder={placeholder} disabled={disabled} rows={rows} {...(register && register(id, {required: required}))} className={`${styles.textarea} ${errors && errors[id] && ""}`}/>
         </Label>
     )
 }

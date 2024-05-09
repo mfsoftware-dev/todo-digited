@@ -5,19 +5,16 @@ import TaskCard from "@/app/(protected)/components/TaskCard";
 import axios from "axios";
 import toast from 'react-hot-toast';
 import useTaskDrawer from "@/app/hooks/task/useTaskDrawer";
-import {useMemo, useState} from "react";
-import {taskPriorityColor, taskPriorityLabel} from "@/app/helpers/taskPriority";
+import {taskPriorityColor, taskPriorityIcon, taskPriorityLabel} from "@/app/helpers/taskPriority";
 import useProjectStore from "@/app/hooks/project/useProjectStore";
 import TaskDrawer from "@/app/(protected)/components/TaskDrawer";
 
 interface TaskListProps {
-    list: Task[],
+    taskList: Task[],
     onChange: () => void,
 }
 
-const TaskList = ({list, onChange}: TaskListProps) => {
-    
-    const [priorityFilter, setPriorityFilter] = useState<string | null>(null);
+const TaskList = ({taskList, onChange}: TaskListProps) => {
     
     const {fetchProjects} = useProjectStore();
     const taskDrawer = useTaskDrawer();
@@ -33,37 +30,30 @@ const TaskList = ({list, onChange}: TaskListProps) => {
         })
     }
     
-    const filteredList = useMemo(() => {
-        if(!priorityFilter) return list;
-        return list.filter((task) => task.priority === priorityFilter);
-    }, [list, priorityFilter])
-    
-    const selectPriority = (value: string) => {
-        setPriorityFilter((currentValue) => (currentValue === value) ? "" : value);
-    }
-    
     return (
         <>
-            <div className={"flex flex-col"}>
-                <div className={"flex space-x-2 items-center"}>
-                    {Object.keys(TaskPriority).map((priority) => {
-                        const isActive = (priorityFilter === priority);
-                        return (
-                            <div key={priority} className={`px-4 h-7 flex items-center justify-center rounded-full font-bold hover:shadow-md hover:opacity-100 transition cursor-pointer text-white ${isActive ? "opacity-100" : "opacity-70"}`} style={{backgroundColor: taskPriorityColor(priority)}} onClick={selectPriority.bind(this, priority)}>
-                                <span className={"text-xs"}>{taskPriorityLabel(priority)}</span>
+            <div className={"mt-10 flex flex-col space-y-10 space-x-0 md:flex-row md:space-x-10 md:space-y-0 justify-evenly"}>
+                {Object.keys(TaskPriority).map((priority) => {
+                    const PriorityIcon = taskPriorityIcon(priority);
+                    const filteredTasks = taskList.filter((task) => task.priority === priority);
+                    return (
+                        <div key={priority} className={"flex flex-col w-full"}>
+                            
+                            <div style={{backgroundColor: taskPriorityColor(priority)}} className={"opacity-90 flex space-x-3 items-center justify-center px-4 py-2 rounded-lg shadow-md"}>
+                                <PriorityIcon className={"text-white"}/>
+                                <span className={"text-base text-white font-bold"}>Priorità {taskPriorityLabel(priority)}</span>
                             </div>
-                        )
-                    })}
-                </div>
-                <div className={"mt-10"}>
-                    {filteredList && filteredList.length > 0 && (
-                        <div className={"flex flex-col space-y-5"}>
-                            {filteredList.map((task) => {
-                                return <TaskCard key={task.id} task={task} onToggleStatus={toggleTaskStatus.bind(this, task.id)} onEditTask={taskDrawer.openDrawer.bind(this, task)}/>
-                            })}
+                            
+                            {filteredTasks.length > 0 && (
+                                <div className={"flex flex-col space-y-5 mt-7"}>
+                                    {taskList.filter((task) => task.priority === priority).map((task) => {
+                                        return <TaskCard key={task.id} task={task} onToggleStatus={toggleTaskStatus.bind(this, task.id)} onEditTask={taskDrawer.openDrawer.bind(this, task)}/>
+                                    })}
+                                </div>
+                            )}
                         </div>
-                    )}
-                </div>
+                    )
+                })}
             </div>
 
             <TaskDrawer onChange={() => {

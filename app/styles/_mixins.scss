@@ -26,8 +26,14 @@
   transition-duration: 150ms;
 }
 
-@mixin only-mobile() {
+@mixin desktop-only() {
   @media (min-width: 768px) { 
-    display: none;
+    @content;
+  }
+}
+
+@mixin mobile-only() {
+  @media (max-width: 640px) { 
+    @content;
   }
 }

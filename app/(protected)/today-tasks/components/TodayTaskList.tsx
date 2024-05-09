@@ -29,7 +29,7 @@ const TodayTaskList = () => {
             <NewTaskForm onSuccess={fetchTodayTasks} />
 
             <div className={"mt-10"}>
-                <TaskList list={taskList} onChange={fetchTodayTasks} />
+                <TaskList taskList={taskList} onChange={fetchTodayTasks} />
             </div>
         </div>
     )
