@@ -57,7 +57,7 @@ const ProfileModal = () => {
     }
     
     return (
-        <Modal isOpen={isOpen} title={"Modifica Profilo"} onClose={closeModal}>
+        <Modal isOpen={isOpen} title={"Modifica Profilo"} description={"Compila i campi per aggiornare il tuo profilo"} onClose={closeModal}>
             <form onSubmit={handleSubmit(updateProfile)}>
                 <div className={"flex flex-col space-y-3"}>
                     <Input id={"name"} label={"Nome"} placeholder={"Inserisci il tuo nome"} register={register} errors={errors} required disabled={isLoading}/>

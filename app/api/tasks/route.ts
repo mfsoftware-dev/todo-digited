@@ -7,7 +7,7 @@ export async function POST(request: NextRequest) {
     try {
         
         const body = await request.json();
-        const { name, projectId } = body;
+        const { name, priority, projectId } = body;
 
         const loggedUser = await getLoggedUser();
 
@@ -16,6 +16,7 @@ export async function POST(request: NextRequest) {
         const createdTask = await prisma.task.create({
             data: {
                 name,
+                priority,
                 expiresAt: endOfDay(new Date()),
                 user: {
                     connect: {

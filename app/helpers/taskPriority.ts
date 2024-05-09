@@ -25,3 +25,8 @@ export const taskPriorityIcon = (priority: string) => {
         default: return MdSignalCellular0Bar;
     }
 }
+
+export const formattedTaskPriority = Object.keys(TaskPriority).map((priority) => ({
+    label: taskPriorityLabel(priority),
+    value: priority
+}))

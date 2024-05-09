@@ -15,7 +15,7 @@ import TextArea from "@/app/components/input/TextArea";
 import {TaskPriority} from "@prisma/client";
 import Select from "@/app/components/input/Select";
 import { isMobile } from 'react-device-detect';
-import {taskPriorityLabel} from "@/app/helpers/taskPriority";
+import {formattedTaskPriority, taskPriorityLabel} from "@/app/helpers/taskPriority";
 import Checkbox from "@/app/components/input/Checkbox";
 import {format} from "date-fns";
 import {it} from "date-fns/locale";
@@ -88,11 +88,6 @@ const TaskDrawer = ({onChange}: TaskDrawerProps) => {
         })
     }
     
-    const taskPrioritiesList = Object.keys(TaskPriority).map((priority) => ({
-        label: taskPriorityLabel(priority),
-        value: priority
-    }))
-    
     const completed = watch("completed");
     
     const formattedProjectList = useMemo(() => {
@@ -128,7 +123,7 @@ const TaskDrawer = ({onChange}: TaskDrawerProps) => {
                                 <Select id={"projectId"} enableClear={false} label={"Progetto"} items={formattedProjectList} register={register} errors={errors} disabled={isLoading}/>
                             </div>
                             <Input id={"expiresAt"} label={"Scadenza"} type={"date"} register={register} errors={errors} required disabled={isLoading}/>
-                            <Select id={"priority"} label={"Priorità"} items={taskPrioritiesList} register={register} errors={errors} required disabled={isLoading}/>
+                            <Select id={"priority"} label={"Priorità"} items={formattedTaskPriority} register={register} errors={errors} required disabled={isLoading}/>
                             <Checkbox label={"Completato"} checked={completed} onChange={(value) => setValue("completed", value)} />
                         </div>
                     </div>

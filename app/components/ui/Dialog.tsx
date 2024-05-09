@@ -17,8 +17,8 @@ interface DialogProps {
 const Dialog = ({isOpen, title, message, onConfirm, onCancel, danger}: DialogProps) => {
     return (
         <Modal isOpen={isOpen} title={title} onClose={onCancel}>
-            <span className={"text-md"}>{message}</span>
-            <hr/>
+            <span className={"text-md mt-5"}>{message}</span>
+            <hr className={"my-4"}/>
             <div className={"flex space-x-3 items-center justify-end mt-3"}>
                 <Button onClick={onCancel} type={ButtonType.SECONDARY} icon={MdClose}>Chiudi</Button>
                 <Button onClick={onConfirm} icon={FaCheck} type={danger ? ButtonType.DANGER : ButtonType.PRIMARY}>Conferma</Button>

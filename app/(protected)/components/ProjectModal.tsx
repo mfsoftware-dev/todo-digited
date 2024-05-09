@@ -52,7 +52,7 @@ const ProjectModal = () => {
     }
     
     return (
-        <Modal isOpen={isOpen} title={`${project ? "Modifica" : "Aggiungi"} Progetto`} onClose={closeModal}>
+        <Modal isOpen={isOpen} title={`${project ? "Modifica" : "Aggiungi"} Progetto`} description={"Compila i campi per inserire e/o modificare un progetto"} onClose={closeModal}>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className={"flex flex-col space-y-3"}>
                     <Input id={"name"} label={"Nome"} placeholder={"Inserisci il nome del progetto"} register={register} errors={errors} required disabled={isLoading}/>

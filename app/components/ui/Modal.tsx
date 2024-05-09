@@ -18,10 +18,12 @@ const Modal = ({title, description, isOpen, onClose, children}: ModalProps) => {
             <Dialog onClose={onClose} className={styles.dialog}>
                 <div className={styles.overlay} aria-hidden={"true"}/>
                 <div className={"fixed inset-0 flex w-screen items-center justify-center p-4"}>
-                    <DialogPanel className={`${styles.panel} space-y-4`}>
-                        <DialogTitle className={styles.title}>{title}</DialogTitle>
-                        {description && <Description>{description}</Description>}
-                        <hr/>
+                    <DialogPanel className={`${styles.panel}`}>
+                        <div className={"flex flex-col space-y-1"}>
+                            <DialogTitle className={styles.title}>{title}</DialogTitle>
+                            {description && <Description className={"text-xs"}>{description}</Description>}
+                        </div>
+                        <hr className={"my-4"}/>
                         {children}
                     </DialogPanel>
                 </div>

@@ -14,7 +14,7 @@ export async function GET() {
             where: {
                 userId: loggedUser.id,
                 expiresAt: {
-                    gte: new Date(),
+                    gte: addDays(new Date(), 1),
                 }
             },
             orderBy: {
