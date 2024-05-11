@@ -119,7 +119,7 @@ const TaskDrawer = ({onChange}: TaskDrawerProps) => {
                     </div>
                 </div>
                 <hr/>
-                <form onSubmit={handleSubmit(updateTask)} className={"flex flex-col space-y-5 h-full"}>
+                <form onSubmit={handleSubmit(updateTask)} className={"flex flex-col space-y-5 h-full overflow-auto"}>
                     <div className={"h-full"}>
                         <div className={"py-3 grid grid-cols-1 md:grid-cols-2 gap-5"}>
                             <div className={"col-span-2"}>
@@ -148,7 +148,6 @@ const TaskDrawer = ({onChange}: TaskDrawerProps) => {
                                 </Label>
                             </div>
                             <Input id={"expiresAt"} label={"Scadenza"} type={"date"} register={register} errors={errors} required disabled={isLoading}/>
-                            <Select id={"priority"} label={"Priorità"} enableClear={false} items={formattedTaskPriority} register={register} errors={errors} required disabled={isLoading}/>
                             <Checkbox label={"Completato"} checked={completed} onChange={(value) => setValue("completed", value)}/>
                         </div>
                     </div>
