@@ -1,12 +1,11 @@
 "use client"
 
-import {Project, Task} from "@prisma/client";
+import {Project} from "@prisma/client";
 import axios from "axios";
-import {useEffect, useState} from "react";
-import {toast} from "react-hot-toast";
+import {useEffect} from "react";
 import NewTaskForm from "@/app/(protected)/components/NewTaskForm";
 import TaskList from "@/app/(protected)/components/TaskList";
-import {useQuery, useQueryClient} from "@tanstack/react-query";
+import {useQuery} from "@tanstack/react-query";
 import Spinner from "@/app/components/ui/Spinner";
 
 interface ProjectTaskListProps {
@@ -20,10 +19,6 @@ const ProjectTaskList = ({project}: ProjectTaskListProps) => {
     }
 
     const { data: res, isLoading, refetch } = useQuery({queryKey: ["projectTasks"], queryFn: fetchProjectTasks});
-
-    useEffect(() => {
-        fetchProjectTasks();
-    }, []);
     
     return (
         <div>

@@ -15,10 +15,6 @@ const UpcomingTaskList = () => {
 
     const { data: res, isLoading, refetch } = useQuery({queryKey: ["upcomingTasks"], queryFn: fetchUpcomingTasks});
     
-    useEffect(() => {
-        fetchUpcomingTasks();
-    }, [])
-    
     return (
         <div>
             <NewTaskForm onSuccess={refetch}/>

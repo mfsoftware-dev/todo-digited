@@ -47,6 +47,8 @@ Per generare il client Prisma utilizzare il comando
 
 [Axios](https://www.npmjs.com/package/axios)
 
+[React Query](https://tanstack.com/query/latest)
+
 ## UI
 
 [HeadlessUI](https://headlessui.com/)
