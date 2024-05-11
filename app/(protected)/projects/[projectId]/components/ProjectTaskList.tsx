@@ -6,23 +6,20 @@ import {useEffect, useState} from "react";
 import {toast} from "react-hot-toast";
 import NewTaskForm from "@/app/(protected)/components/NewTaskForm";
 import TaskList from "@/app/(protected)/components/TaskList";
+import {useQuery, useQueryClient} from "@tanstack/react-query";
+import Spinner from "@/app/components/ui/Spinner";
 
 interface ProjectTaskListProps {
     project: Project
 }
 
 const ProjectTaskList = ({project}: ProjectTaskListProps) => {
-
-    const [taskList, setTaskList] = useState<Task[]>([]);
-
+    
     const fetchProjectTasks = async () => {
-        axios.get(`/api/projects/${project.id}/tasks`).then((res) => {
-            if(res.status !== 200) return setTaskList([]);
-            setTaskList(res.data.items);
-        }).catch((error) => {
-            toast.error(error.response.data);
-        })
+        return await axios.get(`/api/projects/${project.id}/tasks`);
     }
+
+    const { data: res, isLoading, refetch } = useQuery({queryKey: ["projectTasks"], queryFn: fetchProjectTasks});
 
     useEffect(() => {
         fetchProjectTasks();
@@ -30,10 +27,16 @@ const ProjectTaskList = ({project}: ProjectTaskListProps) => {
     
     return (
         <div>
-            <NewTaskForm projectId={project.id} onSuccess={fetchProjectTasks}/>
+            <NewTaskForm projectId={project.id} onSuccess={refetch}/>
             
             <div className={"mt-10"}>
-                <TaskList taskList={taskList} onChange={fetchProjectTasks}/>
+                {isLoading ? (
+                    <Spinner message={"Recupero i task..."}/>
+                ) : (
+                    <>
+                        {res && res.data.items && (<TaskList taskList={res.data.items} onChange={refetch}/>)}
+                    </>
+                )}
             </div>
         </div>
     )

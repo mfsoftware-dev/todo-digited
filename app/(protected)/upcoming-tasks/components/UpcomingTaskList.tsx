@@ -1,24 +1,19 @@
 "use client"
 
 import axios from "axios";
-import {useEffect, useState} from "react";
-import {Task} from "@prisma/client";
+import {useEffect} from "react";
 import NewTaskForm from "@/app/(protected)/components/NewTaskForm";
-import {toast} from "react-hot-toast";
 import TaskList from "@/app/(protected)/components/TaskList";
+import {useQuery} from "@tanstack/react-query";
+import Spinner from "@/app/components/ui/Spinner";
 
 const UpcomingTaskList = () => {
     
-    const [taskList, setTaskList] = useState<Task[]>([]);
-
     const fetchUpcomingTasks = async () => {
-        axios.get("/api/tasks/upcoming").then((res) => {
-            if(res.status !== 200) return setTaskList([]);
-            setTaskList(res.data.items);
-        }).catch((error) => {
-            toast.error(error.response.data);
-        })
+        return await axios.get("/api/tasks/upcoming");
     }
+
+    const { data: res, isLoading, refetch } = useQuery({queryKey: ["upcomingTasks"], queryFn: fetchUpcomingTasks});
     
     useEffect(() => {
         fetchUpcomingTasks();
@@ -26,14 +21,20 @@ const UpcomingTaskList = () => {
     
     return (
         <div>
-            <NewTaskForm onSuccess={fetchUpcomingTasks} />
+            <NewTaskForm onSuccess={refetch}/>
 
             <div className={"mt-10"}>
-                <TaskList taskList={taskList} onChange={fetchUpcomingTasks} />
+                {isLoading ? (
+                    <Spinner message={"Recupero i task..."}/>
+                ) : (
+                    <>
+                        {res && res.data.items && (<TaskList taskList={res.data.items} onChange={refetch}/>)}
+                    </>
+                )}
             </div>
         </div>
     )
-    
+
 }
 
 export default UpcomingTaskList

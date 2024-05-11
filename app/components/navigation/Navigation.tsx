@@ -15,14 +15,20 @@ import Dialog from "@/app/components/ui/Dialog";
 import {toast} from "react-hot-toast";
 import useProjectStore from "@/app/hooks/project/useProjectStore";
 import useAuth from "@/app/hooks/useAuth";
-import {FaCalendarXmark} from "react-icons/fa6";
+import {useQuery, useQueryClient} from "@tanstack/react-query";
+import Spinner from "@/app/components/ui/Spinner";
 
 const Navigation = () => {
     
     const {loggedUser, fetchLoggedUser} = useAuth();
+    
     const {projects, fetchProjects} = useProjectStore();
+    
     const projectModal = useProjectModal();
     const deleteProjectModal = useDeleteProjectModal();
+    
+    const queryClient = useQueryClient();
+    const { isLoading } = useQuery({queryKey: ["projects"], queryFn: fetchProjects});
     
     const deleteProject = () => {
         if(!deleteProjectModal.project) return;
@@ -33,12 +39,11 @@ const Navigation = () => {
         }).catch((error) => {
             toast.error(error.response.data);
         }).finally(() => {
-            fetchProjects();
+            queryClient.invalidateQueries({ queryKey: ['projects'] })
         })
     }
     
     useEffect(() => {
-        fetchProjects();
         fetchLoggedUser();
     }, [])
     
@@ -69,7 +74,13 @@ const Navigation = () => {
                         </div>
 
                         <div className={"flex flex-col space-y-3"}>
-                            <NavigationProjectsList projects={projects} />
+                            {isLoading ? (
+                                <Spinner message={"Recupero i progetti..."}/>
+                            ) : (
+                                <>
+                                    {projects && <NavigationProjectsList projects={projects} />}
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>

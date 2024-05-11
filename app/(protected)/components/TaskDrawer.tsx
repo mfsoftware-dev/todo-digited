@@ -15,12 +15,18 @@ import TextArea from "@/app/components/input/TextArea";
 import {TaskPriority} from "@prisma/client";
 import Select from "@/app/components/input/Select";
 import { isMobile } from 'react-device-detect';
-import {formattedTaskPriority, taskPriorityLabel} from "@/app/helpers/taskPriority";
+import {
+    formattedTaskPriority,
+    taskPriorityColor,
+    taskPriorityIcon,
+    taskPriorityLabel
+} from "@/app/helpers/taskPriority";
 import Checkbox from "@/app/components/input/Checkbox";
 import {format} from "date-fns";
 import {it} from "date-fns/locale";
 import useProjectStore from "@/app/hooks/project/useProjectStore";
 import {FaSave} from "react-icons/fa";
+import Label from "@/app/components/input/Label";
 
 interface TaskDrawerProps {
     onChange: () => void,
@@ -89,6 +95,7 @@ const TaskDrawer = ({onChange}: TaskDrawerProps) => {
     }
     
     const completed = watch("completed");
+    const priority = watch("priority");
     
     const formattedProjectList = useMemo(() => {
         if(!projects) return [];
@@ -120,14 +127,30 @@ const TaskDrawer = ({onChange}: TaskDrawerProps) => {
                                 <Input id={"name"} label={"Nome"} placeholder={"Inserisci il nome del task"} register={register} errors={errors} required disabled={isLoading}/>
                             </div>
                             <div className={"col-span-2"}>
-                                <TextArea id={"description"} label={"Descrizione"} rows={10} placeholder={"Inserisci una descrizione per questo task"} register={register} errors={errors} disabled={isLoading}/>
+                                <TextArea id={"description"} label={"Descrizione"} rows={5} placeholder={"Inserisci una descrizione per questo task"} register={register} errors={errors} disabled={isLoading}/>
                             </div>
                             <div className={"col-span-2"}>
-                                <Select id={"projectId"} enableClear={false} label={"Progetto"} items={formattedProjectList} register={register} errors={errors} disabled={isLoading}/>
+                                <Select id={"projectId"} enableClear={true} label={"Progetto"} items={formattedProjectList} register={register} errors={errors} disabled={isLoading}/>
+                            </div>
+                            <div className={"flex flex-col space-y-2 col-span-2"}>
+                                <Label label={"Priorità"} required>
+                                    <div className={"flex space-x-3"}>
+                                        {Object.keys(TaskPriority).map((value) => {
+                                            const Icon = taskPriorityIcon(value);
+                                            const isSelected = (priority === value);
+                                            return (
+                                                <div key={value} className={`flex space-x-2 items-center rounded-full px-4 py-2 text-xs border-2 cursor-pointer transition ${isSelected ? "text-white" : "text-black"}`} onClick={() => setValue("priority", value)} style={{backgroundColor: (isSelected ? taskPriorityColor(value) : "white")}}>
+                                                    <Icon size={20}/>
+                                                    <span>{taskPriorityLabel(value)}</span>
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
+                                </Label>
                             </div>
                             <Input id={"expiresAt"} label={"Scadenza"} type={"date"} register={register} errors={errors} required disabled={isLoading}/>
-                            <Select id={"priority"} label={"Priorità"} items={formattedTaskPriority} register={register} errors={errors} required disabled={isLoading}/>
-                            <Checkbox label={"Completato"} checked={completed} onChange={(value) => setValue("completed", value)} />
+                            <Select id={"priority"} label={"Priorità"} enableClear={false} items={formattedTaskPriority} register={register} errors={errors} required disabled={isLoading}/>
+                            <Checkbox label={"Completato"} checked={completed} onChange={(value) => setValue("completed", value)}/>
                         </div>
                     </div>
 
